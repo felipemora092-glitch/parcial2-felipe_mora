@@ -19,13 +19,30 @@ public class Experimento {
      */
     public Experimento(String id, String tipoModelo, int maxEpocas) {
         this.id = id;
-        // TODO: implementar composición (factory simple con switch)
-        this.modelo = null;
+        if (tipoModelo == null) {
+            this.modelo = null;
+        } else {
+            switch (tipoModelo.toUpperCase()) {
+                case "CNN":
+                    this.modelo = new ModeloCNN(id, maxEpocas, 1);
+                    break;
+                case "RNN":
+                    this.modelo = new ModeloRNN(id, maxEpocas, 1);
+                    break;
+                case "REGRESION":
+                    this.modelo = new ModeloRegresion(id, maxEpocas, 1);
+                    break;
+                default:
+                    this.modelo = null;
+                    break;
+            }
+        }
     }
-
     /** Ejecuta el entrenamiento del modelo sobre el dataset. */
     public double ejecutar(Dataset dataset) {
-        // TODO: implementar
+        if (this.modelo != null) {
+            return this.modelo.entrenar(dataset);
+        }
         return 0;
     }
 
