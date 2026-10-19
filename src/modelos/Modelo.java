@@ -32,7 +32,10 @@ public abstract class Modelo {
      * actualiza el mejor loss pero no agrega más elementos.
      */
     public void registrarEpoca(int loss) {
-        // TODO: implementar
+        if (this.epocaActual < this.lossPorEpoca.length) {
+            this.lossPorEpoca[this.epocaActual] = loss;
+            this.epocaActual++;
+        }
     }
 
     /**
